@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signal — Ads for businesses that want to be heard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #faf8f4;
+    --paper-dim: #f1efe8;
+    --ink: #15171c;
+    --ink-soft: #565c66;
+    --line: #dcd8cd;
+    --accent: #2f5de3;
+    --accent-soft: #e7ecfc;
+    --signal: #d99a2b;
+    --radius: 2px;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  .eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  h1, h2, h3{
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    line-height: 0.95;
+  }
+
+  :focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(250,248,244,0.88);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height: 72px;
+  }
+  .logo{
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .logo-dot{
+    width:8px; height:8px;
+    background: var(--accent);
+    border-radius:50%;
+    display:inline-block;
+  }
+  .nav-links{
+    display:flex;
+    gap: 36px;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .nav-links a:hover{ color: var(--ink); }
+  .nav-cta{
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    border: 1px solid var(--ink);
+    padding: 9px 18px;
+    border-radius: var(--radius);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .nav-cta:hover{ background: var(--ink); color: var(--paper); }
+
+  @media (max-width: 720px){
+    .nav-links{ display:none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 96px 0 64px;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size: clamp(44px, 6.2vw, 84px);
+    margin: 18px 0 24px;
+  }
+  .hero h1 em{
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero p.lede{
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin-bottom: 32px;
+  }
+  .hero-actions{
+    display:flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn-primary{
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 26px;
+    font-size: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    border-radius: var(--radius);
+    transition: background 0.15s ease;
+  }
+  .btn-primary:hover{ background: var(--accent); }
+  .btn-ghost{
+    padding: 14px 26px;
+    font-size: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--line);
+  }
+  .btn-ghost:hover{ color: var(--ink); border-color: var(--ink); }
+
+  /* Signature: static-to-signal bars */
+  .signal-panel{
+    background: var(--ink);
+    border-radius: var(--radius);
+    padding: 28px;
+    height: 320px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .signal-panel .label-row{
+    display:flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8b90a0;
+  }
+  .signal-panel .label-row .live{
+    color: var(--signal);
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .live-dot{
+    width:6px; height:6px;
+    background: var(--signal);
+    border-radius:50%;
+    animation: blink 1.6s ease-in-out infinite;
+  }
+  @keyframes blink{ 50%{ opacity: 0.25; } }
+
+  #bars{
+    flex:1;
+    display:flex;
+    align-items:flex-end;
+    gap: 4px;
+    margin: 20px 0;
+  }
+  #bars div{
+    flex:1;
+    background: #454b5c;
+    border-radius: 1px;
+    transition: height 0.5s cubic-bezier(.4,0,.2,1), background 0.5s ease;
+  }
+  #bars div.peak{ background: var(--signal); }
+
+  .signal-panel .caption{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #8b90a0;
+  }
+
+  @media (max-width: 900px){
+    .hero .wrap{ grid-template-columns: 1fr; }
+    .signal-panel{ height: 220px; order: -1; }
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding: 88px 0; border-top: 1px solid var(--line); }
+  .section-head{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+  .section-head h2{ font-size: clamp(30px, 4vw, 44px); }
+  .section-head p{
+    max-width: 42ch;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .service-card{
+    background: var(--paper);
+    padding: 32px 24px;
+    display:flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 220px;
+  }
+  .service-card .freq{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+  }
+  .service-card h3{
+    font-size: 22px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .service-card p{
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  @media (max-width: 900px){
+    .services-grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px){
+    .services-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- PROOF STRIP ---------- */
+  .proof{
+    background: var(--ink);
+    color: var(--paper);
+    border-top: none;
+  }
+  .proof-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .proof-item .num{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(30px, 4vw, 44px);
+    color: var(--signal);
+  }
+  .proof-item .desc{
+    font-size: 13px;
+    color: #a7abb8;
+    margin-top: 8px;
+  }
+  @media (max-width: 700px){
+    .proof-grid{ grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  /* ---------- PROCESS ---------- */
+  .process-list{
+    display:flex;
+    flex-direction: column;
+  }
+  .process-row{
+    display:grid;
+    grid-template-columns: 90px 1fr 1.4fr;
+    gap: 24px;
+    align-items:baseline;
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+  }
+  .process-row:last-child{ border-bottom: 1px solid var(--line); }
+  .process-row .step-num{
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--accent);
+    font-size: 14px;
+  }
+  .process-row h3{
+    font-size: 24px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .process-row p{
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+  @media (max-width: 700px){
+    .process-row{ grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  /* ---------- CTA / CONTACT ---------- */
+  .contact .wrap{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+  .contact h2{ font-size: clamp(32px, 4.5vw, 52px); margin-bottom: 16px; }
+  .contact p.lede{ color: var(--ink-soft); max-width: 40ch; margin-bottom: 28px; }
+  .contact-links{ display:flex; flex-direction: column; gap: 14px; }
+  .contact-links a{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 15px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+    display:flex;
+    justify-content: space-between;
+  }
+  .contact-links a:hover{ color: var(--accent); border-color: var(--accent); }
+
+  form{ display:flex; flex-direction: column; gap: 16px; }
+  .field{ display:flex; flex-direction: column; gap: 6px; }
+  .field label{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .field input, .field textarea{
+    background: var(--paper-dim);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .field input:focus, .field textarea:focus{
+    outline: none;
+    border-color: var(--accent);
+    background: var(--paper);
+  }
+  .field textarea{ resize: vertical; min-height: 100px; }
+  .submit-btn{
+    align-self: flex-start;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 28px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .submit-btn:hover{ background: var(--accent); }
+
+  @media (max-width: 800px){
+    .contact .wrap{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 32px 0;
+  }
+  footer .wrap{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  footer .foot-links{ display:flex; gap: 20px; }
+  footer a:hover{ color: var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo"><span class="logo-dot"></span>SIGNAL</div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Book a call</a>
+  </nav>
+</header>
+
+<section class="hero" style="border-top:none;">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Ad campaigns for small &amp; growing businesses</span>
+      <h1>Cut through<br>the <em>noise.</em></h1>
+      <p class="lede">Most ads get lost in the scroll. We plan, build, and run campaigns that turn attention into customers — without the agency jargon or the six-month contracts.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Book a free consultation</a>
+        <a href="#services" class="btn-ghost">See what we run</a>
+      </div>
+    </div>
+
+    <div class="signal-panel">
+      <div class="label-row">
+        <span>Campaign readout</span>
+        <span class="live"><span class="live-dot"></span>Live</span>
+      </div>
+      <div id="bars" aria-hidden="true"></div>
+      <div class="caption">Static in. Signal out.</div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What we run</h2>
+      <p>Four channels, chosen based on where your customers already are — not the ones that are easiest to sell you.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="freq">01 · SOCIAL</span>
+        <h3>Social ads</h3>
+        <p>Instagram, Facebook &amp; TikTok campaigns built around what actually stops the scroll.</p>
+      </div>
+      <div class="service-card">
+        <span class="freq">02 · SEARCH</span>
+        <h3>Search ads</h3>
+        <p>Show up when someone's already looking — Google &amp; Bing campaigns tuned to intent, not just clicks.</p>
+      </div>
+      <div class="service-card">
+        <span class="freq">03 · CREATIVE</span>
+        <h3>Creative &amp; design</h3>
+        <p>Copy, graphics and short-form video made to fit the platform, not stretched to fit it.</p>
+      </div>
+      <div class="service-card">
+        <span class="freq">04 · REPORTING</span>
+        <h3>Strategy &amp; reporting</h3>
+        <p>A plain-language report every month — what worked, what didn't, and what we're changing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="wrap">
+    <div class="proof-grid">
+      <div class="proof-item">
+        <div class="num">48hrs</div>
+        <div class="desc">From kickoff call to your first campaign going live.</div>
+      </div>
+      <div class="proof-item">
+        <div class="num">1:1</div>
+        <div class="desc">One dedicated contact for your account — no ticket queue.</div>
+      </div>
+      <div class="proof-item">
+        <div class="num">0</div>
+        <div class="desc">Long-term contracts. Stay because it's working, not because you're locked in.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How it works</h2>
+      <p>Three steps, start to finish. No lengthy onboarding decks.</p>
+    </div>
+    <div class="process-list">
+      <div class="process-row">
+        <span class="step-num">01</span>
+        <h3>Listen</h3>
+        <p>A short call about your business, your customers, and what "working" actually looks like for you.</p>
+      </div>
+      <div class="process-row">
+        <span class="step-num">02</span>
+        <h3>Tune</h3>
+        <p>We build the campaign, creative and targeting around your budget — then launch it within 48 hours.</p>
+      </div>
+      <div class="process-row">
+        <span class="step-num">03</span>
+        <h3>Broadcast</h3>
+        <p>Campaigns run, get monitored weekly, and get adjusted — with a plain-language report every month.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Get started</span>
+      <h2>Let's get your business heard.</h2>
+      <p class="lede">Tell us a bit about your business and what you're hoping ads will do for it. We'll reply within one business day.</p>
+      <div class="contact-links">
+        <a href="mailto:hello@signalads.co"><span>Email</span><span>hello@signalads.co</span></a>
+        <a href="https://wa.me/10000000000"><span>WhatsApp</span><span>Message us</span></a>
+      </div>
+    </div>
+    <form action="mailto:hello@signalads.co" method="post" enctype="text/plain">
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" placeholder="Your name" required>
+      </div>
+      <div class="field">
+        <label for="business">Business</label>
+        <input id="business" name="business" type="text" placeholder="Business name">
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@business.com" required>
+      </div>
+      <div class="field">
+        <label for="message">What are you hoping to advertise?</label>
+        <textarea id="message" name="message" placeholder="A little about your business and goals"></textarea>
+      </div>
+      <button class="submit-btn" type="submit">Send message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Signal. Ads for businesses that want to be heard.</span>
+    <div class="foot-links">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var bars = document.getElementById('bars');
+    var count = 32;
+    var els = [];
+    for(var i=0;i<count;i++){
+      var d = document.createElement('div');
+      bars.appendChild(d);
+      els.push(d);
+    }
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function noise(){
+      els.forEach(function(el){
+        el.style.height = (8 + Math.random()*100) + '%';
+        el.classList.remove('peak');
+      });
+    }
+
+    function settle(){
+      els.forEach(function(el, i){
+        var wave = 20 + 55 * Math.abs(Math.sin(i/count * Math.PI * 2.2));
+        el.style.height = wave + '%';
+        if(wave > 60){ el.classList.add('peak'); } else { el.classList.remove('peak'); }
+      });
+    }
+
+    if(reduced){
+      settle();
+    } else {
+      var ticks = 0;
+      var noiseInterval = setInterval(function(){
+        noise();
+        ticks++;
+        if(ticks > 6){
+          clearInterval(noiseInterval);
+          settle();
+          setInterval(function(){
+            els.forEach(function(el, i){
+              var t = Date.now()/1200 + i;
+              var wave = 20 + 55 * Math.abs(Math.sin(i/count * Math.PI * 2.2 + Math.sin(t/6)*0.3));
+              el.style.height = wave + '%';
+              if(wave > 60){ el.classList.add('peak'); } else { el.classList.remove('peak'); }
+            });
+          }, 900);
+        }
+      }, 140);
+    }
+  })();
+</script>
+
+</body>
+</html>
